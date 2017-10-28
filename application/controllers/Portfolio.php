@@ -151,11 +151,9 @@ class Portfolio extends CI_Controller{
 		$key_cer = $data['key_certification'];
 		$title = $data['cer_title'];
 		$organization = $data['organization'];
-		$rating = $data['rating'];
-		$percent = $data['percent'];
 		if(!empty($key_cer))
 		{
-			$result_certification = updateCertification($firebase,$key_cer,$title,$organization,$rating,$percent);
+			$result_certification = updateCertification($firebase,$key_cer,$title,$organization);
 			$firebase->set(DEFAULT_PATH.'last_updated',date("m/d/Y"));
 			echo $result_certification;
 		}  

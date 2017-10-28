@@ -56,10 +56,10 @@
     /* function setting certification details */ 
 	function addCertification($data,$firebase)
 	{       
-		$key = array("course_title","organization","percent","rating");
-   		$values = array($data['course_title'],$data['organization'], $data['percent'], $data['grade']);
+		$key = array("course_title","organization");
+   		$values = array($data['course_title'],$data['organization']);
 		$final = array_combine($key,$values);
-		if(!empty($data['course_title']) && !empty($data['organization']) && !empty($data['percent']) && !empty($data['grade']))
+		if(!empty($data['course_title']) && !empty($data['organization']))
 			$firebase->push(DEFAULT_PATH.'certification/',$final);
 		$firebase->set(DEFAULT_PATH.'last_updated',date("m/d/Y"));
 	}
@@ -163,11 +163,11 @@
 	}         
    
   	 /* function updating certification */
-	function updateCertification($firebase,$key_cer,$title,$organization,$rating,$percent)
+	function updateCertification($firebase,$key_cer,$title,$organization)
 	{
 		$CI=&get_instance();
   		define('DEFAULT_PATH','users/'.$CI->session->userdata('user').'/');
-		$arr = array('course_title'=>$title,'organization'=>$organization,'rating'=>$rating,'percent'=>$percent);
+		$arr = array('course_title'=>$title,'organization'=>$organization);
 		$firebase->set(DEFAULT_PATH.'certification/'.$key_cer,$arr);
 		$firebase->set(DEFAULT_PATH.'last_updated',date("m/d/Y"));
 		return $firebase->get(DEFAULT_PATH.'certification/'.$key_cer);

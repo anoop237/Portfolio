@@ -7,10 +7,9 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <!--script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-      <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css"-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
       <link rel="stylesheet" href="<?=base_url('assets/css/newstyle.css');?>"/>
@@ -34,6 +33,14 @@
               $('#from_date').datepicker('setEndDate', maxDate);
           });  
         });
+        function activate(i){
+          if(i){
+            $("#activator").show();
+          }
+          else{
+            $("#activator").hide();
+          }
+        }
       </script>
       <style>      
         .chosen-container {
@@ -46,9 +53,45 @@
         .datepicker table{
           border-width:0;
         }
+        @keyframes sk-threeBounceDelay{
+          0%,100%,80%{
+            transform:scale(0);
+          }
+          40%{
+            transform:scale(1);
+          }
+        }
+        .sk-spinner-three-bounce.sk-spinner {
+          margin: 0 auto;
+          width: 70px;
+          text-align: center;
+        }
+        .sk-spinner-three-bounce .sk-bounce1 {
+          -webkit-animation-delay: -.32s;
+          animation-delay: -.32s;
+        }
+        .sk-spinner-three-bounce div {
+          width: 20px;
+          height: 20px;
+          background-color: #000;
+          border-radius: 100%;
+          display: inline-block;
+          -webkit-animation: sk-threeBounceDelay 1.4s infinite ease-in-out;
+          animation: sk-threeBounceDelay 1.4s infinite ease-in-out;
+          -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+          opacity: .5;
+        }
       </style>
     </head>
  	<body>
+   <div id="activator" style="display:none;position:fixed;top:46%;left:47%;z-index:60000;">
+    <div class="sk-spinner sk-spinner-three-bounce">
+      <div class="sk-bounce1 "></div>
+      <div class="sk-bounce2 "></div>
+      <div class="sk-bounce3 "></div>
+    </div>
+   </div>
   		<div class="container">
   			<div class="row">
   				<div class="col-md-2 col-sm-0 col-xs-0"></div>
@@ -69,7 +112,7 @@
               </div>
   					</div>
   				</div>
-  				<div class="col-md-4 col-md-offset-1 col-sm-6 xs_center pt-lg mt-lg">
+  				<div class="col-md-4 col-md-offset-1 col-sm-6 xs_center pt-lg mt-lg" style="margin-top:50px">
   					<div id="default_mail"><?php if(isset($username)) echo $username?></div>
   					<form id="change_pic_form" name="change_pic_form">
   						<div>
@@ -172,7 +215,7 @@
                 </div>
               <div class="form-group">
                 <label for="dob">DOB:</label>
-                <input type="text" id="dob" name="dob" class="form-control" placeholder="mm/dd/yyyy">
+                <input type="text" id="dob" name="dob" class="form-control" placeholder="mm/dd/yyyy" value="<?php if(isset($pd['dob'])) echo $pd['dob']?>">
               </div>
               <div class="form-group">
                 <label for="email">Email:</label>
@@ -412,7 +455,7 @@
                   </div>
                 </div>
                 <div><span id="<?=$keys?>_cer2"><?=$value['organization']?></span></div>
-                <div>Grade: <span id="<?=$keys?>_cer3"><?=$value['rating']?></span> | Percentage: <span id="<?=$keys?>_cer4"><?=$value['percent']?></span>%</div>
+  
               </div>
               <form  id="<?=$keys?>_form" name="<?=$keys?>_form" class="details_form pb-lg pl-lg pr-lg pt-md ">
                 <div class="form-group">
@@ -423,20 +466,10 @@
                   <label for="<?=$keys.$value['organization']?>">Certification Authority:</label>
                   <input type="text" class="form-control" id="<?=$keys.$value['organization']?>" name="<?=$keys.$value['organization']?>" value="<?=$value['organization']?>">
                 </div>
-                <div class="form-group">
-                  <label for="<?=$keys.$value['rating']?>">Grade:</label>
-                  <input type="text" class="form-control" id="<?=$keys.$value['rating']?>" name="<?=$keys.$value['rating']?>" value="<?=$value['rating']?>">
-                </div>
-                <div class="form-group">
-                  <label for="<?=$keys.$value['percent']?>">Percentage:</label>
-                  <input type="number" class="form-control" min="0" max="100" id="<?=$keys.$value['percent']?>" name="<?=$keys.$value['percent']?>" value="<?=$value['percent']?>">
-                </div>
                 <div class="btn_container">
                     <button type="button" id="<?=$keys?>_save_btn" name="<?=$keys?>_save_btn" class="btn btn-info mr-sm"
                         onclick="updateCertification('<?=$keys?>', document.getElementById('<?=$keys.$value['course_title']?>').value, 
-                                  document.getElementById('<?=$keys.$value['organization']?>').value,
-                                  document.getElementById('<?=$keys.$value['rating']?>').value,
-                                  document.getElementById('<?=$keys.$value['percent']?>').value)">Save
+                                  document.getElementById('<?=$keys.$value['organization']?>').value)">Save
                     </button>
                     <button type="button" id="<?=$keys?>_cancel_btn" name="<?=$keys?>_cancel_btn" class="btn btn-default ml-sm" onclick="cer_view('<?=$keys?>')">Cancel</button>
                   </div>
@@ -473,14 +506,6 @@
               <div class="form-group">
                 <label for="organization">Certification Authority:</label>
                 <input type="text" class="form-control" id="organization" name="organization" placeholder="Certification Authority" required="required"/>
-              </div>
-              <div class="form-group">
-                <label for="grade">Grade:</label>
-                <input type="text" class="form-control" id="grade" name="grade" placeholder="Grade" required="required"/>
-              </div>
-              <div class="form-group">
-                <label for="percent">Percentage:</label>
-                <input type="number" class="form-control" id="percent" name="percent" min="0" max="100" placeholder="Percentage" required="required"/>
               </div>
               <div class="btn_container">
                 <button type="submit" class="btn btn-info mr-sm" id="certification_save" name="certification_save">Add</button>

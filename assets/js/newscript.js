@@ -26,9 +26,7 @@ function validateCertification()
 {
 	var course = document.getElementById('course_title').value;
 	var authority = document.getElementById('organization').value;
-	var grade = document.getElementById('grade').value;
-	var percent = document.getElementById('percent').value;
-	if((course=='') || (authority=='') || (grade=='') || (percent=='') || (percent>100))
+	if((course=='') || (authority==''))
 	{
 		$('#invalid_certification_modal').modal({show: 'true' });
 		return false;
@@ -284,12 +282,6 @@ function updatePersonalDetails()
 	var city=document.getElementById('city').value;
 	var state=document.getElementById('state').value;
 	var country=document.getElementById('country').value;
-	if((name=='')||(gender=='')||(dob=='')||(email=='')||(contact=='')||(city=='')||(state=='')||(country==''))
-	{
-		$('#personal_modal').modal({
-    	show: 'true' });
-		return;
-	}
 	var atpos = email.indexOf("@");
 	var dotpos = email.lastIndexOf(".");
 	if(atpos<1 || dotpos<atpos+2 || dotpos+2>=email.length) 
@@ -304,23 +296,23 @@ function updatePersonalDetails()
  		$('#invalid_contact_modal').modal({
     	show: 'true' });
  		return false;  
-	} 
+	}
+	activate(1); 
 	$.ajax({
 		'type':'POST',
 		'url':'updatepersonal',
 		'data':{"name":name,"gender":gender,"dob":dob,"email":email,"contact":contact,"city":city,"state":state,"country":country},
 		success:function(responseText){
 				document.getElementById('pd_name').innerHTML = JSON.parse(responseText).name;
-				document.getElementById('default_name').innerHTML = JSON.parse(responseText).name;
 				document.getElementById('pd_gender').innerHTML = JSON.parse(responseText).gender;
 				document.getElementById('pd_dob').innerHTML = JSON.parse(responseText).dob;
 				document.getElementById('pd_email').innerHTML = JSON.parse(responseText).email;
-				document.getElementById('default_mail').innerHTML = JSON.parse(responseText).email;
 				document.getElementById('pd_contact').innerHTML = JSON.parse(responseText).contact;
 				document.getElementById('pd_city').innerHTML = JSON.parse(responseText).city;
 				document.getElementById('pd_state').innerHTML = JSON.parse(responseText).state;
 				document.getElementById('pd_country').innerHTML = JSON.parse(responseText).country;
 				pd_view();
+				activate(0);
 		}
 	});
 }
@@ -331,6 +323,7 @@ function updateSocialMedia()
 	var facebook=encodeURIComponent(document.getElementById('facebook_id').value);
 	var twitter=encodeURIComponent(document.getElementById('twitter_id').value);
 	var linkedin=encodeURIComponent(document.getElementById('linkedin_id').value);
+	activate(1);
 	$.ajax({
 		'type':'POST',
 		'url':'updatesocial',
@@ -340,6 +333,7 @@ function updateSocialMedia()
 				document.getElementById('pd_twitter').innerHTML = JSON.parse(responseText).twitter_id;
 				document.getElementById('pd_linkedin').innerHTML = JSON.parse(responseText).linkedin_id;
 				social_view();
+				activate(0);
 				}
 			});
 }
@@ -356,6 +350,7 @@ function updateExperience(key,company,role,location,start,till_date)
 	if (company.length != 0 && role.length != 0 && location.length != 0 && start.length != 0 && till.length != 0)
 	 {
 		var current_date=document.getElementById(key+'_current_date').value;
+		activate(1);
 		$.ajax({
 		'type':'POST',
 		'url':'updateexperience',
@@ -367,6 +362,7 @@ function updateExperience(key,company,role,location,start,till_date)
 				document.getElementById(key+'_exp4').innerHTML = JSON.parse(responseText).start_date;
 				document.getElementById(key+'_exp5').innerHTML = JSON.parse(responseText).till_date;
 				exp_view(key);
+				activate(0);
 				}
 			});
 		removeModalFromButton(key);
@@ -378,20 +374,20 @@ function updateExperience(key,company,role,location,start,till_date)
  }
  
 /* function updating certification  */
-function updateCertification(key,title,organization,rating,percent)
+function updateCertification(key,title,organization)
 {
-  	if (title.length != 0 && organization.length != 0 && rating.length != 0 && percent.length != 0) 
+  	if (title.length != 0 && organization.length != 0 ) 
   	{
+		activate(1);
 		$.ajax({
 		'type':'POST',
 		'url':'updatecertification',
-		'data':{"key_certification":key,"cer_title":title,"organization":organization,"rating":rating,"percent":percent},
+		'data':{"key_certification":key,"cer_title":title,"organization":organization},
 		success:function(responseText){
 				document.getElementById(key+'_cer1').innerHTML = JSON.parse(responseText).course_title;
 	        	document.getElementById(key+'_cer2').innerHTML = JSON.parse(responseText).organization;
-	        	document.getElementById(key+'_cer3').innerHTML = JSON.parse(responseText).rating;
-	        	document.getElementById(key+'_cer4').innerHTML = JSON.parse(responseText).percent;
-	        	cer_view(key);
+				cer_view(key);
+				activate(0);
 				}
 			});
    	}
@@ -406,6 +402,7 @@ function updateEducation(key,college,course,year)
 {
 	if (course.length != 0 && college.length != 0 && year.length != 0)
 	{
+		activate(1);
 		$.ajax({
 		'type':'POST',
 		'url':'updateeducation',
@@ -414,7 +411,8 @@ function updateEducation(key,college,course,year)
 				document.getElementById(key+'_edu1').innerHTML = JSON.parse(responseText).college;
 				document.getElementById(key+'_edu2').innerHTML = JSON.parse(responseText).course;
 				document.getElementById(key+'_edu3').innerHTML = JSON.parse(responseText).year;
-	        	education_view(key);
+				education_view(key);
+				activate(0);
 				}
 			});
 		removeModalFromButton(key);
@@ -429,6 +427,7 @@ function updateAward(key,award_title,given_by)
 {
 	if (award_title.length != 0  && given_by.length!=0) 
 	{
+		activate(1);
 		$.ajax({
 		'type':'POST',
 		'url':'updateaward',
@@ -437,6 +436,7 @@ function updateAward(key,award_title,given_by)
 				document.getElementById(key+'_awd1').innerHTML = JSON.parse(responseText).award_title;
 				document.getElementById(key+'_awd2').innerHTML = JSON.parse(responseText).given_by;
 				award_view(key);
+				activate(0);
 				}
 			});
 		removeModalFromButton(key);
@@ -463,10 +463,7 @@ function removeModalFromButton(key)
 /*function deleting experience*/  
 function deleteExperience(key)
 {	
-	if(key.length==0)
- 	{
- 		return;
- 	}
+	activate(1);
  	$.ajax({
  		'type':"POST",
  		'url':'deleteexperience',
@@ -474,16 +471,14 @@ function deleteExperience(key)
  		success:function(){
  			var element = document.getElementById(key+'_exp_block');
 			element.parentNode.removeChild(element);
+			activate(0);
  		}
  	});
  }
 /*function deleting certification*/
 function deleteCertification(key)
 {	
-	if(key.length==0)
- 	{
- 		return;
- 	}
+	activate(1);
  	$.ajax({
  		'type':"POST",
  		'url':'deletecertification',
@@ -491,6 +486,7 @@ function deleteCertification(key)
  		success:function(){
  			var element = document.getElementById(key+'_cer_block');
 			element.parentNode.removeChild(element);
+			activate(0);
  		}
  	});
 }	
@@ -498,10 +494,7 @@ function deleteCertification(key)
 /*function deleting education*/ 
 function deleteEducation(key)
 {	
-	if(key.length==0)
-	{
-		return;
-	}
+	activate(1);
 	$.ajax({
  		'type':"POST",
  		'url':'deleteeducation',
@@ -509,6 +502,7 @@ function deleteEducation(key)
  		success:function(){
  			var element = document.getElementById(key+'_education_block');
 			element.parentNode.removeChild(element);
+			activate(0);
  		}
  	});
 }
@@ -516,6 +510,7 @@ function deleteEducation(key)
 /*function deleting skill*/			
 function deleteSkill(key)
 {	
+	activate(1);
 	$.ajax({
  		'type':"POST",
  		'url':'deleteskill',
@@ -523,17 +518,14 @@ function deleteSkill(key)
  		success:function(){
  			var element = document.getElementById(key+'_skl');
 			element.parentNode.removeChild(element);
+			activate(0);
  		}
  	});
 }
  
 /*function deleting award*/
 function deleteAward(key)
-{	
-	if(key.length==0)
-	 {
-		return;
-	 }
+{	activate(1);
 	$.ajax({
  		'type':"POST",
  		'url':'deleteaward',
@@ -541,114 +533,8 @@ function deleteAward(key)
  		success:function(){
  			var element = document.getElementById(key+'_award_block');
 			element.parentNode.removeChild(element);
+			activate(0);
  		}
  	});
 }
 
-/* *************************************JS code for admin page******************************************** */
-
-/* Disable sorting of first column*/
-
-/*   filtering names     */
-function getNames()
-{
-	var input, filter, table, tr, td, i;
-	input = document.getElementById("name_filter");
-	filter = input.value.toUpperCase();
-	table = document.getElementById("myTable");
- 	tr = table.getElementsByTagName("tr");
-	for (i = 0; i < tr.length; i++)
-	{
-		td = tr[i].getElementsByTagName("td")[2];
-  	  	filterData(i,tr,td,filter);
-	}
-}
-
-/*   filtering country    */
-
-function getCountry()
-{
-	var input, filter, table, tr, td, i;
-	input = document.getElementById("country_filter");
-	filter = input.value.toUpperCase();
- 	table = document.getElementById("myTable");
- 	tr = table.getElementsByTagName("tr");
- 	for (i = 0; i < tr.length; i++)
-	{
-		td = tr[i].getElementsByTagName("td")[5];
-  	  	filterData(i,tr,td,filter);
- 	}
-}
-
-/*   filtering skills     */
-
-function getSkills()
-{
-	var input, filter, table, tr, td, i;
-	input = document.getElementById("skill_filter");
-	filter = input.value.toUpperCase();
- 	table = document.getElementById("myTable");
-	tr = table.getElementsByTagName("tr");
-	for (i = 0; i < tr.length; i++)
-	{
-		td = tr[i].getElementsByTagName("td")[9];
-  	  	filterData(i,tr,td,filter);
- 	}
-}
-
-/*   filtering certification     */
-
-function getCertification()
-{
-	var input, filter, table, tr, td, i;
-	input = document.getElementById("certification_filter");
-	filter = input.value.toUpperCase();
-	table = document.getElementById("myTable");
-	tr = table.getElementsByTagName("tr");
-	for (i = 0; i < tr.length; i++)
-	{
-		td = tr[i].getElementsByTagName("td")[10];
-		filterData(i,tr,td,filter);
- 	}
-}
-function filterData(i,tr,td,filter)
-{
-	if(td)
-	{
-		if (td.innerHTML.toUpperCase().indexOf(filter) > -1)
-		{
-        	tr[i].style.display = "";
-		}
-      	else
-		{
-        	tr[i].style.display = "none";
-		}
-	} 
-}
-
-/*  deleting record of customer   */
-
-function deleteRecord(guid)
-{
-	var YOUR_MESSAGE_STRING_CONST = "Do you really want to delete this record?";
-	confirmDialog(YOUR_MESSAGE_STRING_CONST, function(){
-		var xhttp;
-		xhttp = new XMLHttpRequest();
-  		xhttp.open("GET", "admin_page.php?guid="+guid, true);
-  		xhttp.send();
-  		window.location.reload(true);
-    	});   
-}
- 
-function confirmDialog(message, onConfirm)
-{
-	var fClose = function(){ 
-     	modal.modal("hide");
-     };
-	var modal = $("#confirmModal");
-	modal.modal("show");
-	$("#confirmMessage").empty().append(message);
-	$("#confirmOk").one('click', onConfirm);
-	$("#confirmOk").one('click', fClose);
-	$("#confirmCancel").one("click", fClose);
-}
