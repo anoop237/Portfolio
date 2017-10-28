@@ -7,49 +7,33 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+      <!--script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+      <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css"-->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
       <link rel="stylesheet" href="<?=base_url('assets/css/newstyle.css');?>"/>
         <script type="text/javascript" src="<?=base_url().'assets/js/newscript.js'?>"></script>
       <script type="text/javascript">
         $(document).ready(function(){
           $('.chosen').chosen();
+          $('#dob').datepicker({format: 'mm/dd/yyyy',
+            autoclose: true});  
+          $("#from_date").datepicker({
+              todayBtn:  1,
+              autoclose: true,
+          }).on('changeDate', function (selected) {
+              var minDate = new Date(selected.date.valueOf());
+              $('#till_date').datepicker('setStartDate', minDate);
+          });
+          $("#till_date").datepicker({format: 'mm/dd/yyyy',
+              autoclose: true})
+          .on('changeDate', function (selected) {
+              var maxDate = new Date(selected.date.valueOf());
+              $('#from_date').datepicker('setEndDate', maxDate);
+          });  
         });
-        /*function for date selection*/
-            $(function () {
-               var bindDatePicker = function() {
-                $(".date").datetimepicker({
-                    format:'MM/DD/YYYY',
-                  icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
-                  }
-                }).find('input').on("blur",function () {
-                  // check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
-                  // update the format if it's yyyy-mm-dd
-                  var date = parseDate($(this).val());
-                  if(date)
-                    $(this).val(date);
-                  else
-                    $(this).val('');
-                });
-              }
-              
-               var parseDate = function(value) {
-                var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
-                if (m)
-                  return value;
-                else
-                  return false;
-               }
-               
-               bindDatePicker();
-             });
-    
       </script>
       <style>      
         .chosen-container {
@@ -59,17 +43,8 @@
         {
            display: none;
         }
-        .bootstrap-datetimepicker-widget{
-          min-width:200px;
-          height:270px;
-        }
-        .bootstrap-datetimepicker-widget *{
-          border:0;
-        }
-        .glyphicon-calendar,.glyphicon-chevron-left,.glyphicon-chevron-right
-        {
-         font-size:18px;
-         top:0px;
+        .datepicker table{
+          border-width:0;
         }
       </style>
     </head>
@@ -197,12 +172,7 @@
                 </div>
               <div class="form-group">
                 <label for="dob">DOB:</label>
-                <!--input type="text" id="dob" name="dob" class="form-control"  onmouseover="pickDate()"-->
-                <div class='input-group date'>
-                    <input type='text' name="dob" id='dob' class="form-control" value="<?php if(isset($pd['dob'])) echo $pd['dob']?>" placeholder="mm/dd/yyyy" />
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
+                <input type="text" id="dob" name="dob" class="form-control" placeholder="mm/dd/yyyy">
               </div>
               <div class="form-group">
                 <label for="email">Email:</label>
@@ -313,37 +283,37 @@
               </div>
               <form  id="<?=$k?>_form" name="<?=$k?>_form" class="details_form pb-lg pl-lg pr-lg pt-md ">
                 <div class="form-group">
-                  <label for="<?=$k?><?=$value['company']?>">Company Name:</label>
-                  <input type="text" class="form-control" id="<?=$k?><?=$value['company']?>" name="<?=$k?><?=$value['company']?>" placeholder="Company Name" value="<?=$value['company']?>" />
+                  <label for="<?=$k?>_company">Company Name:</label>
+                  <input type="text" class="form-control" id="<?=$k?>_company" name="<?=$k?>_company" placeholder="Company Name" value="<?=$value['company']?>" />
                 </div>
                 <div class="form-group">
-                  <label for="<?=$k?><?=$value['role']?>">Title:</label>
-                  <input type="text" class="form-control" id="<?=$k?><?=$value['role']?>" name="<?=$k?><?=$value['role']?>" placeholder="Title" value="<?=$value['role']?>"/>
+                  <label for="<?=$k?>_role">Title:</label>
+                  <input type="text" class="form-control" id="<?=$k?>_role" name="<?=$k?>_role" placeholder="Title" value="<?=$value['role']?>"/>
                 </div>
                 <div class="form-group">
-                  <label for="<?=$k?><?=$value['location']?>">Job Location:</label>
-                  <input type="text" class="form-control" id="<?=$k?><?=$value['location']?>" name="<?=$k?><?=$value['location']?>" placeholder="Job Location" value="<?=$value['location']?>" />
+                  <label for="<?=$k?>_location">Job Location:</label>
+                  <input type="text" class="form-control" id="<?=$k?>_location" name="<?=$k?>_location" placeholder="Job Location" value="<?=$value['location']?>" />
                 </div>
                 <div class="form-group">
-                  <label for="<?=$k?><?=$value['start_date']?>">From Date:</label>
-                  <input type="text" class="form-control" id="<?=$k?><?=$value['start_date']?>" name="<?=$k?><?=$value['start_date']?>" placeholder="mm/dd/yyyy" value="<?=$value['start_date']?>" onmouseover="setExpDate(this)"/>
+                  <label for="<?=$k?>_start_date">From Date:</label>
+                  <input type="text" class="form-control" id="<?=$k?>_start_date" name="<?=$k?>_start_date" placeholder="mm/dd/yyyy" value="<?=$value['start_date']?>" onmouseover="setExpDate('<?=$k?>')"/>
                 </div>
                 <div class="form-group">
-                  <label for="<?=$k.$value['till_date']?>">Till Date:</label>
-                  <input type="text" class="form-control" id="<?=$k.$value['till_date']?>" name="<?=$k.$value['till_date']?>" placeholder="mm/dd/yyyy" <?php if($value['till_date']=="present"){?>disabled<?php }if($value['till_date']!="present"){?>value="<?=$value['till_date']?>" <?php }?>  onchange="disableCheckbox('<?=$k?>','<?=$k.$value['till_date']?>')" onmouseover="setExpDate(this)"/>
+                  <label for="<?=$k?>_till_date">Till Date:</label>
+                  <input type="text" class="form-control" id="<?=$k?>_till_date" name="<?=$k?>_till_date" placeholder="mm/dd/yyyy" <?php if($value['till_date']=="present"){?>disabled<?php }if($value['till_date']!="present"){?>value="<?=$value['till_date']?>" <?php }?>  onchange="disableCheckbox('<?=$k?>')" onmouseover="setExpDate('<?=$k?>')"/>
                 </div>
                 <label>
-                  <input type="checkbox" name="<?=$k?>_current_date" id="<?=$k?>_current_date" <?php if($value['till_date']!="present"){?>disabled<?php }if($value['till_date']=="present"){?>checked<?php }?> value="present" onchange="toggleTillDate('<?=$k?>','<?=$k.$value['till_date']?>')"/>
+                  <input type="checkbox" name="<?=$k?>_current_date" id="<?=$k?>_current_date" <?php if($value['till_date']!="present"){?>disabled<?php }if($value['till_date']=="present"){?>checked<?php }?> value="present" onchange="toggleTillDate('<?=$k?>')"/>
                   Currently working
                 </label>
                 <div class="btn_container">
                     <button type="button" id="<?=$k?>_save_btn" name="<?=$k?>_save_btn" class="btn btn-info mr-sm"
                         onclick="updateExperience('<?=$k?>', 
-                                  document.getElementById('<?=$k.$value['company']?>').value,
-                                  document.getElementById('<?=$k.$value['role']?>').value, 
-                                  document.getElementById('<?=$k.$value['location']?>').value, 
-                                  document.getElementById('<?=$k.$value['start_date']?>').value, 
-                                  document.getElementById('<?=$k.$value['till_date']?>').value
+                                  document.getElementById('<?=$k?>_company').value,
+                                  document.getElementById('<?=$k?>_role').value, 
+                                  document.getElementById('<?=$k?>_location').value, 
+                                  document.getElementById('<?=$k?>_start_date').value, 
+                                  document.getElementById('<?=$k?>_till_date').value
                                   )">Save
                   </button>
                   <button type="button" id="<?=$k?>_cancel_btn" name="<?=$k?>_cancel_btn" class="btn btn-default ml-sm" onclick="exp_view('<?=$k?>')">Cancel</button>
@@ -388,19 +358,11 @@
               </div>
               <div class="form-group">
                 <label for="from_date">From Date:</label>
-                 <div class='input-group date'>
-                    <input type='text' name="from_date" id='from_date' class="form-control"  placeholder="mm/dd/yyyy" required="required"/>
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-                </div>
+                <input type='text' name="from_date" id='from_date' class="form-control"  placeholder="mm/dd/yyyy" required="required"/>
               </div>
               <div class="form-group">
                 <label for="till_date">Till Date:</label>
-                <div class='input-group date'>
-                    <input type='text' name="till_date" id='till_date' class="form-control" onchange="toggleCheckbox()" onblur="toggleCheckbox()" placeholder="mm/dd/yyyy" required="required"/>
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-                </div>
+                <input type='text' name="till_date" id='till_date' class="form-control" onchange="toggleCheckbox()"  placeholder="mm/dd/yyyy" required="required"/>  
               </div>
               <label for="current_date">
                 <input type="checkbox" name="current_date" id="current_date" value="present" title="Check if currently working" onchange="toggleLastDate()"/>

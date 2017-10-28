@@ -131,9 +131,21 @@ $(document).ready(function(){
 });
  	
 /*function for setting experience date */ 
-function setExpDate(id)
+function setExpDate(key)
 {
-	$(id).datetimepicker({format:'MM/DD/YYYY'});    
+	$("#"+key+"_start_date").datepicker({
+		todayBtn:  1,
+		autoclose: true,
+	}).on('changeDate', function (selected) {
+		var minDate = new Date(selected.date.valueOf());
+		$("#"+key+"_till_date").datepicker('setStartDate', minDate);
+	});
+	$("#"+key+"_till_date").datepicker({format: 'mm/dd/yyyy',
+		autoclose: true})
+	.on('changeDate', function (selected) {
+		var maxDate = new Date(selected.date.valueOf());
+		$("#"+key+"_start_date").datepicker('setEndDate', maxDate);
+	});     
 }
 function toggleLastDate(key)
 {
@@ -165,21 +177,21 @@ function toggleCheckbox()
 }
 
 /*function for making disable till date */
-function toggleTillDate(key,id)
+function toggleTillDate(key)
 {
 	if(document.getElementById(key + '_current_date').checked)  
 	{
- 		document.getElementById(id).disabled=true;
+ 		document.getElementById(key+"_till_date").disabled=true;
  	}
 	else 
 	{ 
-		document.getElementById(id).disabled=false;
+		document.getElementById(key+"_till_date").disabled=false;
 	}
 }
 /*function for making disable checkbox */ 
-function disableCheckbox(key,id)
+function disableCheckbox(key)
 {
-	var x=document.getElementById(id).value  ;
+	var x=document.getElementById(key+'_till_date').value  ;
 	if(x.length>0)  
 	{
 	 	document.getElementById(key+'_current_date').checked=false;
@@ -189,7 +201,7 @@ function disableCheckbox(key,id)
 	{ 
 		document.getElementById(key+'_current_date').removeAttribute("disabled");
 		document.getElementById(key+'_current_date').checked=true;
-		document.getElementById(id).disabled=true;
+		document.getElementById(key+"_till_date").disabled=true;
 	}
 }
 function pd_edit()
