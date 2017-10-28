@@ -1,0 +1,288 @@
+/* style of admin page */
+.table_responsive
+{
+	overflow-x: auto;
+}
+.admin_page_blocks
+{
+	line-height: 1.5;
+}
+
+/*style of portfolio page */
+.profile_pic
+{
+	width: 200px;
+	height: 200px;
+	padding: 5px;
+	background-clip: content-box;
+	background-size: cover;
+}
+.profile_pic img
+{
+	width: 190px;
+	height: 190px;
+}
+.profile_pic,.profile_pic img	
+{
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+}
+.details_form
+{
+	background: #eee;
+	border: 1px solid #dddddd;
+}
+select.form-control
+{
+	padding-left: 8px;
+}
+.personal-information li ,.personal-information>div 
+{
+    border-bottom: 1px solid #eeeeee;
+    color: #727272;
+   	margin-bottom: 10px;
+   	padding-bottom: 12px;
+}
+.personal-information .row div:first-child
+{
+	font-weight: 700;
+}
+.h1
+{
+	color: #afb2b5;
+	font-size: 28px;
+	margin-top: 10px;
+}
+.type2_heading
+{
+	margin: 5px 0;
+	font-size:20px;
+}
+.skill-information .h1
+{
+	margin-bottom: 7px;
+}
+.experience-block,.certification-block,.education-block,.award-block
+{
+	padding-bottom: 12px;
+}
+.skill-block
+{
+	display: inline-block;
+	border: 1px solid #ddd;
+	margin: 0 5px 8px 0;
+	padding: 5px 10px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+.fa
+{
+	cursor: pointer;
+}
+.experience-block .fa,.certification-block .fa,.award-block .fa,.education-block .fa
+{
+	padding: 10px 0 0 10px;
+	font-size: 24px;
+}
+.fa-trash-o,.profile_pic,.close,input[type='checkbox']
+{
+	position: relative;
+}
+.fa-trash-o
+{
+	bottom: 2px;
+}
+.personal-information .fa
+{
+	padding-top: 5px;
+}
+.chosen-container-multi .chosen-choices li.search-field input[type=text] 
+{
+	min-width: 200px;	
+}
+select.chosen+.chosen-container-multi .chosen-choices li.search-field input[type="text"] 
+{
+	padding: 5px 5px;
+}
+.glyphicon
+{
+	font-size: 32px;
+	top: 10px;
+}
+.twitter_icon,.fb_icon,.fa-linkedin-square
+{
+	font-size: 30px;
+}
+.twitter_icon
+{	
+	color: #1dcaff;
+}
+.fb_icon
+{
+	color: #3b5998;
+}
+.fa-linkedin-square
+{
+	color: #287bbc;
+}
+.other_skill,input.pic,.education-block form,.experience-block form,.certification-block form,.award-block form,.personal_details_form,.social_details_form
+{
+	display: none;
+}
+.social-information ul li  span
+{
+	vertical-align: super;
+}
+.social-information ul li
+{
+	padding-bottom: 6px;
+	margin-bottom: 2px;
+}
+.form-group label
+{
+	padding-left: 1px;
+}
+.close
+{
+	bottom: 5px;
+	left: 5px;
+}
+select.chosen+.chosen-container-multi .chosen-choices li.search-choice
+{
+	margin: 1px 0 1px 3px;
+}
+select.chosen+.chosen-container-multi .chosen-choices 
+{
+	padding: 4px 2px 3px;
+}
+.skill-block,.experience-block>div,.certification-block>div,.education-block>div,.award-block>div
+{
+	background: #eeeeee;
+}	
+.experience-block>div,.certification-block>div,.education-block>div,.award-block>div
+{
+	padding: 2px 15px 12px;
+}
+.col-md-5
+{
+	padding: 0;
+}
+.btn_container .btn
+{
+	width: 70px
+}
+input[type="checkbox"]
+{
+	top: 2px;
+}
+.form-group
+{
+	margin-bottom: 10px;
+}
+.btn_container
+{
+	float: right;
+}
+.modal
+{
+	top: 150px;
+}
+.other_skill
+{
+	float: left;
+}
+@media (max-width:768px)
+{
+	body,form .btn,.form-control,select.chosen+.chosen-container .chosen-results
+	{
+		font-size: 12px;
+	}
+	.h1,.experience-block .fa,.certification-block .fa,.award-block .fa,.education-block .fa
+	{
+		font-size: 18px;
+	}
+	.modal
+	{
+		padding-top: 15px;
+	}
+	.skill-block
+	{
+		font-size: 10px;
+		padding: 4px 7px 0;
+		margin: 3px 0 3px 3px;
+	}
+	.type2_heading,.close
+	{
+		font-size: 14px;
+	}
+	.close
+	{
+		padding: 4px 2px 0 0;
+	}
+	.type2_heading
+	{
+		line-height: 1;	
+		padding-top: 10px;
+	}
+	.experience-block .fa,.certification-block .fa,.award-block .fa,.education-block .fa
+	{
+		padding: 10px 0 0 5px;
+	}
+	.glyphicon
+	{
+		font-size: 22px;
+		top: 6px;
+	}
+	.form-control 
+	{
+    	height: 26px;
+    	padding: 1px 5px 2px;
+    }
+    .form-group
+    {
+    	margin-bottom: 5px;
+    }
+    input[type="checkbox"]
+    {
+    	margin: 2px 0 0;
+    }
+    .btn_container .btn
+    {
+    	font-size: 12px;
+    	height: 28px;
+    	padding: 3px;
+    	width: 52px;
+    }
+    .btn_container
+    {
+    	margin-top: 5px;
+    }
+    select.chosen+.chosen-container-multi .chosen-choices 
+	{
+		padding: 4px 2px 2px;
+	}
+}
+@media (max-width:480px)
+{
+	.profile_pic
+	{
+		width: 150px;
+		height: 150px;
+		top: 30px;
+	}
+	.xs_center
+	{
+		text-align: center;
+	}
+	.profile_pic img
+	{
+		width: 140px;
+		height: 140px;
+	}
+	select.chosen+.chosen-container-multi .chosen-choices li.search-choice
+	{
+		font-size: 11px;
+	}
+}
