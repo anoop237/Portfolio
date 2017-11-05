@@ -50,7 +50,7 @@
               color:#fff;
           }
           .alert{
-            margin-top:30px;
+            margin-top:60px;
           }
           .navbar-inverse{
           border-radius:0;
