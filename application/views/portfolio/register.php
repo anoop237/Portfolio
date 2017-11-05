@@ -93,12 +93,12 @@
         <div  id="login-modal" >
         <div>
         <div class="loginmodal-container">
-          <h1>Registration Form</h1><br>
+          <h1>Sign Up</h1><br>
           <?=form_open('user/register');?>
             <input type="email" name="user" placeholder="Email" required>
             <input type="password" name="pass" placeholder="Password">
             <input type="password" name="pass_again" placeholder="Re-Enter Password" required>
-            <input type="submit" name="login" value="Register">
+            <input type="submit" name="login" value="Sign Up">
           <?=form_close();?>  
           <div class="login-help">
           <?php echo anchor('user/login','Login')?>

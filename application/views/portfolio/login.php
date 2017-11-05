@@ -96,7 +96,7 @@
         <div  id="login-modal" >
         <div>
         <div class="loginmodal-container">
-          <h1>Login Form</h1><br>
+          <h1>Log In</h1><br>
           <?=form_open('user/login');?>
             <input type="email" name="user" placeholder="Email" required>
             <input type="password" name="pass" placeholder="Password">
