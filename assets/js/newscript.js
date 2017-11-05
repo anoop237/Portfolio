@@ -1,3 +1,13 @@
+/*Activator */
+
+function activate(i){
+	if(i){
+	  $("#activator").show();
+	}
+	else{
+	  $("#activator").hide();
+	}
+  }
 function validateExperience()
 {
 	var company = document.getElementById('company_name').value;
@@ -100,6 +110,7 @@ function encodeImageFileAsURL()
 	var filesSelected = document.getElementById("profile_pic").files;
 	var myFile = document.getElementById("profile_pic").files[0];
 	var filetype=myFile.type;
+	activate(1);
 	var ValidImageTypes = ["image/gif", "image/jpeg", "image/png", "image/jpg", "image/GIF", "image/JPEG", "image/PNG", "image/JPG"];	
 	if((filesSelected.length > 0) && ($.inArray(filetype,ValidImageTypes)>=0)) 
 	{
@@ -111,9 +122,12 @@ function encodeImageFileAsURL()
 			{
 				var srcData = e.target.result; // <--- data: base64
 				$.post("updatepicture",{picture: srcData},function(response)
-				{
-					if($.parseJSON(response)!=null)
+				{console.log(response);
+					if($.parseJSON(response)!=null){
 						document.getElementById('profile_image').src=$.parseJSON(response);
+						activate(0);
+					}
+						
 				});
  			}
 		fileReader.readAsDataURL(fileToLoad);

@@ -2,7 +2,6 @@
 <html>
   <head>
     	<title>Portfolio</title>
-      <link href="http://www.jigyaasa.net/layout/themes/bootstrap3-2016/style.min.css" rel="stylesheet" />
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
@@ -33,14 +32,6 @@
               $('#from_date').datepicker('setEndDate', maxDate);
           });  
         });
-        function activate(i){
-          if(i){
-            $("#activator").show();
-          }
-          else{
-            $("#activator").hide();
-          }
-        }
       </script>
       <style>      
         .chosen-container {
@@ -67,20 +58,76 @@
           text-align: center;
         }
         .sk-spinner-three-bounce .sk-bounce1 {
-          -webkit-animation-delay: -.32s;
-          animation-delay: -.32s;
+          -webkit-animation-delay: -.4s;
+          animation-delay: -.4s;
+        }
+        .sk-spinner-three-bounce .sk-bounce2 {
+          -webkit-animation-delay: -.3s;
+          animation-delay: -.3s;
+        }
+        .sk-spinner-three-bounce .sk-bounce3 {
+          -webkit-animation-delay: -.2s;
+          animation-delay: -.2s;
+        }
+        .sk-spinner-three-bounce .sk-bounce4 {
+          -webkit-animation-delay: -.1s;
+          animation-delay: -.1s;
         }
         .sk-spinner-three-bounce div {
-          width: 20px;
-          height: 20px;
-          background-color: #000;
-          border-radius: 100%;
+          width: 10px;
+          height: 70px;
+          border-radius: 10px;
           display: inline-block;
           -webkit-animation: sk-threeBounceDelay 1.4s infinite ease-in-out;
           animation: sk-threeBounceDelay 1.4s infinite ease-in-out;
           -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
           opacity: .5;
+        }
+        .sk-bounce1{
+          background : blue;
+        }
+        .sk-bounce2{
+          background : red;
+        }
+        .sk-bounce3{
+          background : yellow;
+        }
+        .sk-bounce4{
+          background : green;
+        }
+        .navbar-inverse{
+          border-radius:0;
+          border:0;
+          background:#5bc0de;
+        }
+        .navbar-inverse .navbar-brand {
+          color: #fff;
+          font-size:28px;
+        }
+        .navbar-inverse .navbar-nav>li>a{
+          color:#fff;
+        }
+        .mt-sm{
+          margin-top:5px;
+        } 
+        .pb-lg{
+          padding-bottom:20px;
+        } 
+        .pl-lg{
+          padding-left:20px;
+        } 
+        .pr-lg{
+          padding-right:20px;
+        } 
+        .pt{
+          padding-top:3px;
+        }
+        .pt-md{
+          padding-top:15px;
+        }
+        .ml-md{
+          margin-left:15px;
         }
       </style>
     </head>
@@ -90,12 +137,23 @@
       <div class="sk-bounce1 "></div>
       <div class="sk-bounce2 "></div>
       <div class="sk-bounce3 "></div>
+      <div class="sk-bounce4 "></div>
     </div>
    </div>
-  		<div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Portfolio</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><?=anchor('user/logout','Logout')?></li>
+        </ul>
+      </div>
+    </nav>
+  		<div class="container" style="padding-top:70px">
   			<div class="row">
-  				<div class="col-md-2 col-sm-0 col-xs-0"></div>
-  				<div class="col-md-3 col-sm-4">
+  				<div class="col-md-2"></div>
+  				<div class="col-md-3 col-sm-4 col-xs-6">
   					<div id="profile">	
   						<div class="profile_pic center-block">
               <?php 
@@ -112,7 +170,7 @@
               </div>
   					</div>
   				</div>
-  				<div class="col-md-4 col-md-offset-1 col-sm-6 xs_center pt-lg mt-lg" style="margin-top:50px">
+  				<div class="col-md-4 col-md-offset-1 col-sm-6 col-xs-6 xs_center pt-lg" style="margin-top:60px">
   					<div id="default_mail"><?php if(isset($username)) echo $username?></div>
   					<form id="change_pic_form" name="change_pic_form">
   						<div>
@@ -141,7 +199,7 @@
       		 			</div>
   					</form>
   				</div>
-  				<div class="col-md-2 col-sm-2 col-xs-0"><?=anchor('user/logout','Logout')?></div>
+  				<div class="col-md-2 col-sm-2"></div>
   			</div>
   			<div class="row">
   				<div class="col-md-2 col-xs-0 col-sm-0"></div>
@@ -202,7 +260,7 @@
   					</div>
             <form class="details_form mt-sm pb-lg pl-lg pr-lg pt-md personal_details_form" name="personal_details_form" id="personal_details_form">
               <div class="form-group">
-                <label for="name">Name:</label>
+                <label for="name">Name</label>
                 <input type="text" id="name" name="name" class="form-control" placeholder="Name" value="<?php if(isset($pd['name'])) echo $pd['name']?>"/>
               </div>
               <div class="form-group">
@@ -214,11 +272,11 @@
               </select>    
                 </div>
               <div class="form-group">
-                <label for="dob">DOB:</label>
-                <input type="text" id="dob" name="dob" class="form-control" placeholder="mm/dd/yyyy" value="<?php if(isset($pd['dob'])) echo $pd['dob']?>">
+                <label for="dob">DOB</label>
+                <input type="text" data-date-end-date="0d" id="dob" name="dob" class="form-control" placeholder="mm/dd/yyyy" value="<?php if(isset($pd['dob'])) echo $pd['dob']?>">
               </div>
               <div class="form-group">
-                <label for="email">Email:</label>
+                <label for="email">Email</label>
                 <input type="email" id="email" name="email" class="form-control" placeholder="Email" value="<?php if(isset($pd['email'])) echo $pd['email']?>">
               </div>
               <div class="modal fade" id="invalid_email_modal" role="dialog">
@@ -239,7 +297,7 @@
                   </div>
                 </div>  
               <div class="form-group">
-                <label for="contact">Contact:</label>
+                <label for="contact">Contact</label>
                 <input type="text" id="contact" name="contact" class="form-control" placeholder="Contact" value="<?php if(isset($pd['contact'])) echo $pd['contact']?>">
               </div>
               <div class="modal fade" id="invalid_contact_modal" role="dialog">
@@ -260,15 +318,15 @@
                   </div>
                 </div>  
               <div class="form-group">
-                <label for="city">City:</label>
+                <label for="city">City</label>
                 <input type="text" id="city" name="city" class="form-control" placeholder="City" value="<?php if(isset($pd['city'])) echo $pd['city']?>">
               </div>  
               <div class="form-group">
-                <label for="state">State:</label>
+                <label for="state">State</label>
                 <input type="text" id="state" name="state" class="form-control" placeholder="State" value="<?php if(isset($pd['state'])) echo $pd['state']?>">
               </div>  
               <div class="form-group">
-                <label for="country">Country:</label>
+                <label for="country">Country</label>
                 <select name="country" id="country" class="form-control">
                     <option value="">Select Country</option>
                 <?php 
@@ -277,23 +335,6 @@
                 <?php }?>
               </select>  
               </div>
-              <div class="modal fade" id="personal_modal" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                      <div class="modal-header">
-                          <label class="close" data-dismiss="modal">&times;</label>
-                        <h4 class="modal-title">Personal Information</h4>
-                      </div>
-                      <div class="modal-body">
-                          <p>All fields are mandatory!</p>
-                      </div>
-                      <div class="modal-footer">
-                          <button type="button" id="personal_modal_btn" name="personal_modal_btn" class="btn btn-info" data-dismiss="modal">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>  
               <div class="btn_container">
                 <button type="button" name="personal_details_save" id="personal_details_save" class="btn btn-info mr-sm" onclick="updatePersonalDetails()">Save</button>
                 <button type="button" name="personal_details_cancel" id="personal_details_cancel" class="btn btn-default" onclick="pd_view()">Cancel</button>
@@ -326,23 +367,23 @@
               </div>
               <form  id="<?=$k?>_form" name="<?=$k?>_form" class="details_form pb-lg pl-lg pr-lg pt-md ">
                 <div class="form-group">
-                  <label for="<?=$k?>_company">Company Name:</label>
+                  <label for="<?=$k?>_company">Company Name</label>
                   <input type="text" class="form-control" id="<?=$k?>_company" name="<?=$k?>_company" placeholder="Company Name" value="<?=$value['company']?>" />
                 </div>
                 <div class="form-group">
-                  <label for="<?=$k?>_role">Title:</label>
+                  <label for="<?=$k?>_role">Title</label>
                   <input type="text" class="form-control" id="<?=$k?>_role" name="<?=$k?>_role" placeholder="Title" value="<?=$value['role']?>"/>
                 </div>
                 <div class="form-group">
-                  <label for="<?=$k?>_location">Job Location:</label>
+                  <label for="<?=$k?>_location">Job Location</label>
                   <input type="text" class="form-control" id="<?=$k?>_location" name="<?=$k?>_location" placeholder="Job Location" value="<?=$value['location']?>" />
                 </div>
                 <div class="form-group">
-                  <label for="<?=$k?>_start_date">From Date:</label>
+                  <label for="<?=$k?>_start_date">From Date</label>
                   <input type="text" class="form-control" id="<?=$k?>_start_date" name="<?=$k?>_start_date" placeholder="mm/dd/yyyy" value="<?=$value['start_date']?>" onmouseover="setExpDate('<?=$k?>')"/>
                 </div>
                 <div class="form-group">
-                  <label for="<?=$k?>_till_date">Till Date:</label>
+                  <label for="<?=$k?>_till_date">Till Date</label>
                   <input type="text" class="form-control" id="<?=$k?>_till_date" name="<?=$k?>_till_date" placeholder="mm/dd/yyyy" <?php if($value['till_date']=="present"){?>disabled<?php }if($value['till_date']!="present"){?>value="<?=$value['till_date']?>" <?php }?>  onchange="disableCheckbox('<?=$k?>')" onmouseover="setExpDate('<?=$k?>')"/>
                 </div>
                 <label>
@@ -388,23 +429,23 @@
           <div id="experience_details" class="collapse">
             <form class="mt-sm pb-lg pl-lg pr-lg pt-md details_form" name="experience_details_form" id="experience_details_form" method="post" onsubmit="return validateExperience()">
               <div class="form-group">
-                <label for="company_name">Company Name:</label>
+                <label for="company_name">Company Name</label>
                 <input type="text" id="company_name" name="company_name" placeholder="Company Name" class="form-control" required="required"/>
               </div>
               <div class="form-group">
-                <label for="role">Title:</label>
+                <label for="role">Title</label>
                 <input type="text" id="role" name="role" class="form-control" placeholder="Title" required="required"/>
               </div>
               <div class="form-group">
-                <label for="location">Job Location:</label>
+                <label for="location">Job Location</label>
                 <input type="text" id="location" name="location" class="form-control" placeholder="Job Location" required="required"/>
               </div>
               <div class="form-group">
-                <label for="from_date">From Date:</label>
+                <label for="from_date">From Date</label>
                 <input type='text' name="from_date" id='from_date' class="form-control"  placeholder="mm/dd/yyyy" required="required"/>
               </div>
               <div class="form-group">
-                <label for="till_date">Till Date:</label>
+                <label for="till_date">Till Date</label>
                 <input type='text' name="till_date" id='till_date' class="form-control" onchange="toggleCheckbox()"  placeholder="mm/dd/yyyy" required="required"/>  
               </div>
               <label for="current_date">
@@ -459,11 +500,11 @@
               </div>
               <form  id="<?=$keys?>_form" name="<?=$keys?>_form" class="details_form pb-lg pl-lg pr-lg pt-md ">
                 <div class="form-group">
-                  <label for="<?=$keys.$value['course_title']?>">Certification Course:</label>
+                  <label for="<?=$keys.$value['course_title']?>">Certification Course</label>
                   <input type="text" class="form-control" id="<?=$keys.$value['course_title']?>" name="<?=$keys.$value['course_title']?>" value="<?=$value['course_title']?>">
                 </div>
                 <div class="form-group">
-                  <label for="<?=$keys.$value['organization']?>">Certification Authority:</label>
+                  <label for="<?=$keys.$value['organization']?>">Certification Authority</label>
                   <input type="text" class="form-control" id="<?=$keys.$value['organization']?>" name="<?=$keys.$value['organization']?>" value="<?=$value['organization']?>">
                 </div>
                 <div class="btn_container">
@@ -500,11 +541,11 @@
           <div id="certification_details" class="collapse">
             <form class="mt-sm pb-lg pl-lg pr-lg pt-md  details_form" name="certification_details_form" id="certification_details_form" method="post" onsubmit="return validateCertification()">
               <div class="form-group">
-                <label for="course_title">Certification Course:</label>
+                <label for="course_title">Certification Course</label>
                 <input type="text" class="form-control" id="course_title" name="course_title" placeholder="Certification Course" required="required"/>
               </div>
               <div class="form-group">
-                <label for="organization">Certification Authority:</label>
+                <label for="organization">Certification Authority</label>
                 <input type="text" class="form-control" id="organization" name="organization" placeholder="Certification Authority" required="required"/>
               </div>
               <div class="btn_container">
@@ -554,15 +595,15 @@
               </div>
               <form  id="<?=$x?>_form" name="<?=$x?>_form" class="details_form pb-lg pl-lg pr-lg pt-md ">
                 <div class="form-group">
-                  <label for="<?=$x.$value['college']?>">College/University:</label>
+                  <label for="<?=$x.$value['college']?>">College/University</label>
                   <input type="text" class="form-control" id="<?=$x.$value['college']?>" name="<?=$x.$value['college']?>" placeholder="College/University" value="<?=$value['college']?>" />
                 </div>
                 <div class="form-group">
-                  <label for="<?=$x.$value['course']?>">Course:</label>
+                  <label for="<?=$x.$value['course']?>">Course</label>
                   <input type="text" class="form-control" id="<?=$x.$value['course']?>" name="<?=$x.$value['course']?>" placeholder="Course" value="<?=$value['course']?>" />
                 </div>
                 <div class="form-group">
-                  <label for="<?=$x.$value['year']?>">Completion Year:</label>
+                  <label for="<?=$x.$value['year']?>">Completion Year</label>
                   <input type="number" min="1900" max="2999" class="form-control" id="<?=$x.$value['year']?>" name="<?=$x.$value['year']?>" placeholder="Completion Year" value="<?=$value['year']?>" />
                 </div>
                 <div class="btn_container">
@@ -594,15 +635,15 @@
           <div id="education_details" class="collapse">
             <form class="mt-sm pb-lg pl-lg pr-lg pt-md  details_form" name="education_details_form" id="award_details_form" method="post" onsubmit="return validateEducation()">
               <div class="form-group">
-                <label for="college">College/University:</label>
+                <label for="college">College/University</label>
                 <input type="text" class="form-control" id="college" name="college" placeholder="College/University" required="required"/>
               </div>
               <div class="form-group">
-                <label for="course">Course:</label>
+                <label for="course">Course</label>
                 <input type="text" class="form-control" id="course" name="course" placeholder="Course" required="required"/>
               </div>
               <div class="form-group">
-                <label for="year">Completion Year:</label>
+                <label for="year">Completion Year</label>
                 <input type="number" min="1900" max="2999" class="form-control" id="year" name="year" placeholder="Completion Year" required="required"/>
               </div>
               <div class="btn_container">
@@ -649,7 +690,7 @@
           <div id="skill_details" class="collapse">
             <form class="mt-sm pb-lg pl-lg pr-lg pt-md  details_form" name="skill_details_form" id="skill_details_form" method="post" onsubmit="return validateSkill()">
               <div class="form-group" onclick="bindEvent()">
-                <label for="skill_title">Select Skills:</label>
+                <label for="skill_title">Select Skills</label>
                 <select  id="skill_title" name="skill_title[]" class="chosen form-control" multiple="true" data-sel="<?=$skill_list?>" >
                       <?php foreach($skill_list as $skill_value){?>
                         <option value="<?=$skill_value?>"><?=$skill_value?></option>
@@ -657,7 +698,7 @@
                     </select>
                   </div>  
                   <div class="other_skill" id="other_skill_block">
-                    <label for="other_skill">Other Skill:</label>
+                    <label for="other_skill">Other Skill</label>
                     <input type="text" name="other_skill" id="other_skill" />
                   </div>
               <div class="btn_container">
@@ -708,11 +749,11 @@
               </div>
               <form id="<?=$keyz?>_form" name="<?=$keyz?>_form" class="details_form pb-lg pl-lg pr-lg pt-md ">
                 <div class="form-group">
-                  <label for="<?=$keyz.$value['award_title']?>">Title:</label>
+                  <label for="<?=$keyz.$value['award_title']?>">Title</label>
                   <input type="text" class="form-control" id="<?=$keyz.$value['award_title']?>" name="<?=$keyz.$value['award_title']?>" placeholder="Title" value="<?=$value['award_title']?>" />
                 </div>
                 <div class="form-group">
-                  <label for="<?=$keyz.$value['given_by']?>">Issuer:</label>
+                  <label for="<?=$keyz.$value['given_by']?>">Issuer</label>
                   <input type="text" class="form-control" id="<?=$keyz.$value['given_by']?>" placeholder="Issuer" name="<?$keyz.$value['given_by']?>" value="<?=$value['given_by']?>" />
                 </div>
                 <div class="btn_container">
@@ -744,11 +785,11 @@
           <div id="award_details" class="collapse">
             <form class="mt-sm pb-lg pl-lg pr-lg pt-md details_form" name="award_details_form" id="award_details_form" method="post" onsubmit="return validateAward()">
               <div class="form-group">
-                <label for="award_title">Title:</label>
+                <label for="award_title">Title</label>
                 <input type="text" class="form-control" id="award_title" name="award_title" placeholder="Title" required="required"/>
               </div>
               <div class="form-group">
-                <label for="award_by">Issuer:</label>
+                <label for="award_by">Issuer</label>
                 <input type="text" class="form-control" id="award_by" name="award_by" placeholder="Issuer" required="required"/>
               </div>
               <div class="btn_container">
@@ -803,15 +844,15 @@
             </ul>
             <form class="details_form mt-sm pb-lg pl-lg pr-lg pt-md social_details_form" name="social_details_form" id="social_details_form">
               <div class="form-group">
-                <label for="facebook_id">Facebook Id:</label>
+                <label for="facebook_id">Facebook Id</label>
                 <input type="text" id="facebook_id" name="facebook_id" class="form-control" placeholder="Facebook Id" value="<?php if(isset($social['facebook_id'])) echo $social['facebook_id']?>"/>
               </div>  
               <div class="form-group">
-                <label for="twitter_id">Twitter Id:</label>
+                <label for="twitter_id">Twitter Id</label>
                 <input type="text"  id="twitter_id" name="twitter_id" class="form-control" placeholder="Twitter Id" value="<?php if(isset($social['twitter_id'])) echo $social['twitter_id']?>"/>
               </div>  
               <div class="form-group">
-                <label for="linkedin_id">Linkedin Id:</label>
+                <label for="linkedin_id">Linkedin Id</label>
                 <input type="text" id="linkedin_id" name="linkedin_id" class="form-control" placeholder="Linkedin Id" value="<?php if(isset($social['linkedin_id'])) echo $social['linkedin_id']?>"/>
               </div>  
               <div class="btn_container">

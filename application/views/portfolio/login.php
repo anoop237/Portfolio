@@ -2,16 +2,12 @@
 <html>
   <head>
     	<title>Portfolio</title>
-      <link href="http://www.jigyaasa.net/layout/themes/bootstrap3-2016/style.min.css" rel="stylesheet" />
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="http://www.jigyaasa.net/layout/themes/bootstrap3-2016/foundation/js/jquery-1.10.2.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		  <script type="text/javascript" src="<?=base_url().'assets/js/newscript.js'?>"></script>
-      <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.min.css" rel= "stylesheet"/>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
       <link rel="stylesheet" href="<?=base_url('assets/css/newstyle.css');?>"/>
       <style>
         .loginmodal-container {
@@ -49,15 +45,47 @@
               position: relative;
               padding: 17px 0px;
               font-family: roboto;
-              font-size: 14px;
-              background-color: #357ae8;
+              font-size: 16px;
+              background:#5bc0de;
+              color:#fff;
           }
           .alert{
             margin-top:30px;
           }
+          .navbar-inverse{
+          border-radius:0;
+          border:0;
+          background:#5bc0de;
+        }
+        .navbar-inverse .navbar-brand {
+          color: #fff;
+          font-size:28px;
+        }
+        .navbar-inverse .navbar-nav>li>a{
+          color:#fff;
+        }
       </style>
     </head>
     <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Portfolio</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Portfolio</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><?=anchor('user/register','Create Account')?></li>
+        </ul>
+      </div>
+    </nav>
+        </ul>
+      </div>
+    </nav>
       <div class="container">  
       <?php if($error2=$this->session->flashdata("login_failed")):?>
         <div class="alert alert-danger alert-dismissable">
@@ -75,7 +103,7 @@
             <input type="submit" name="login" value="Login">
           <?=form_close();?>  
           <div class="login-help">
-          <?php echo anchor('user/register','Register')?>
+          <?php echo anchor('user/register','Create Account')?>
           </div>
         </div>
       </div>

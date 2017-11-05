@@ -73,36 +73,30 @@
           <a class="navbar-brand" href="#">Portfolio</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li><?=anchor('user/login','Login')?></li>
+            <li><?=anchor('user/register','Create Account')?></li>
         </ul>
       </div>
     </nav>
       <div class="container">  
-      <?php if($error=$this->session->flashdata("registration_success")):?>
+      <?php if($success=$this->session->flashdata("success")):?>
         <div class="alert alert-success alert-dismissable">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <?php echo $error;?>
+          <?php echo $success;?>
         </div> 
       <?php endif;?>
-      <?php if($error2=$this->session->flashdata("registration_failed")):?>
+      <?php if($error=$this->session->flashdata("error")):?>
         <div class="alert alert-danger alert-dismissable">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          <?php echo $error2;?>
+          <?php echo $error;?>
         </div> 
       <?php endif;?>
         <div  id="login-modal" >
         <div>
         <div class="loginmodal-container">
-          <h1>Registration Form</h1><br>
-          <?=form_open('user/register');?>
+          <?=form_open('profile/view');?>
             <input type="email" name="user" placeholder="Email" required>
-            <input type="password" name="pass" placeholder="Password">
-            <input type="password" name="pass_again" placeholder="Re-Enter Password" required>
-            <input type="submit" name="login" value="Register">
+            <input type="submit" name="login" value="View Profile">
           <?=form_close();?>  
-          <div class="login-help">
-          <?php echo anchor('user/login','Login')?>
-          </div>
         </div>
       </div>
       </div>
