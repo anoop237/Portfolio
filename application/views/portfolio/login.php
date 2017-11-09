@@ -97,7 +97,7 @@
         <div>
         <div class="loginmodal-container">
           <h1>Log In</h1><br>
-          <?=form_open('user/login');?>
+          <?=form_open('user/login',array('autocomplete'=>'off'));?>
             <input type="email" name="user" placeholder="Email" required>
             <input type="password" name="pass" placeholder="Password">
             <input type="submit" name="login" value="Login">

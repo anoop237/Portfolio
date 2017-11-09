@@ -94,7 +94,7 @@
         <div>
         <div class="loginmodal-container">
           <h1>Sign Up</h1><br>
-          <?=form_open('user/register');?>
+          <?=form_open('user/register',array('autocomplete'=>'off'));?>
             <input type="email" name="user" placeholder="Email" required>
             <input type="password" name="pass" placeholder="Password">
             <input type="password" name="pass_again" placeholder="Re-Enter Password" required>
