@@ -3,6 +3,7 @@ include_once APPPATH."third_party/firebase/firebaseStub.php";
 include_once APPPATH."third_party/firebase/firebaseInterface.php";
 include_once APPPATH."third_party/firebase/firebaseLib.php";
 const DEFAULT_URL = 'https://akg-learn.firebaseio.com/';
+error_reporting(0);
 class Portfolio extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
